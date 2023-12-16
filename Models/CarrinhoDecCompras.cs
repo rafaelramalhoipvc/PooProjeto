@@ -49,6 +49,48 @@ namespace Models
             }
             return total;
         }
+
+        /// <summary>
+        /// Remove um jogo específico do carrinho de compras do cliente.
+        /// </summary>
+        /// <param name="jogos">A lista de jogos disponíveis.</param>
+        public void RemoverDoCarrinho(Cliente cliente, List<Jogo> jogos)
+        {
+            Console.Clear();
+            Console.WriteLine("===== Remover do Carrinho =====");
+
+            if (cliente.jogosNoCarrinho.Count > 0)
+            {
+                Console.WriteLine("Jogos no Carrinho:");
+
+                for (int i = 0; i < cliente.jogosNoCarrinho.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {cliente.jogosNoCarrinho[i].Nome} - Quantidade: {cliente.jogosNoCarrinho[i].Quantidade}");
+                }
+
+                Console.Write("Escolha o número do jogo a ser removido: ");
+                if (int.TryParse(Console.ReadLine(), out int escolha) && escolha >= 1 && escolha <= cliente.jogosNoCarrinho.Count)
+                {
+                    // Remover o jogo escolhido do carrinho
+                    Jogo jogoRemovido = cliente.jogosNoCarrinho[escolha - 1];
+                    cliente.jogosNoCarrinho.Remove(jogoRemovido);
+
+                    Console.WriteLine($"{jogoRemovido.Nome} removido do carrinho com sucesso.\n");
+                }
+                else
+                {
+                    Console.WriteLine("Escolha inválida. Tente novamente.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Carrinho vazio. Não há jogos para remover.");
+            }
+
+            Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
+            Console.ReadKey();
+            Console.Clear();
+        }
     }
 
 }

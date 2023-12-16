@@ -39,5 +39,39 @@ namespace Models
             JogosComprados = new List<Jogo>(); // Inicializa a lista para evitar null reference
             DataCompra = DateTime.Now;
         }
+
+        /// <summary>
+        /// Finaliza a compra, atualizando os estoques de jogos, registrando a compra no histórico do cliente
+        /// e salvando as alterações nos arquivos.
+        /// </summary>
+        /// <param name="cliente">O cliente que está realizando a compra.</param>
+        /// <param name="jogos">A lista de jogos disponíveis.</param>
+        public void RealizarCompra(Cliente cliente, List<Jogo> jogos)
+        {
+            // Adicionar jogos no carrinho aos jogos disponíveis
+            foreach (var jogoNoCarrinho in cliente.jogosNoCarrinho)
+            {
+                Jogo jogoOriginal = jogos.Find(j => j.Nome == jogoNoCarrinho.Nome);
+                if (jogoOriginal != null)
+                {
+                    jogoOriginal.Quantidade -= jogoNoCarrinho.Quantidade;
+                }
+            }
+
+            // Adicionar a compra ao histórico do cliente
+            Compra novaCompra = new Compra(new List<Jogo>(cliente.jogosNoCarrinho));
+            cliente.HistoricoCompras.Add(novaCompra);
+
+            Console.WriteLine("Compra bem-sucedida! Obrigado por comprar conosco.");
+
+            // Limpar carrinho
+            cliente.jogosNoCarrinho.Clear();
+
+            // Salvar os jogos atualizados no arquivo
+            GerirFicheiros.SalvarJogos(jogos);
+
+            // Salvar o histórico de compras no arquivo associado ao cliente
+            cliente.SalvarHistoricoCompras();
+        }
     }
 }

@@ -36,7 +36,7 @@ namespace Models
         /// </summary>
         public List<Compra> HistoricoCompras { get; set; }
 
-        private List<Jogo> jogosNoCarrinho = new List<Jogo>();
+        public List<Jogo> jogosNoCarrinho = new List<Jogo>();
         private const string ComprasFolder = "HistoricoCompras";
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Models
                     Console.Write($"Digite a quantidade desejada para {jogoSelecionado.Nome}: ");
                 }
 
-                AdicionarAoCarrinho(jogoSelecionado, quantidadeDesejada);
+                AdicionarQuantidadeAoCarrinho(jogoSelecionado, quantidadeDesejada);
             }
             else
             {
@@ -219,7 +219,7 @@ namespace Models
         /// </summary>
         /// <param name="jogo">O jogo a ser adicionado ao carrinho.</param>
         /// <param name="quantidade">A quantidade desejada do jogo.</param>
-        public void AdicionarAoCarrinho(Jogo jogo, int quantidade)
+        public void AdicionarQuantidadeAoCarrinho(Jogo jogo, int quantidade)
         {
             if (quantidade > 0 && quantidade <= jogo.Quantidade)
             {
@@ -268,10 +268,12 @@ namespace Models
                 switch (opcao)
                 {
                     case "1":
-                        RealizarCompra(cliente, jogos);
+                        Compra compra = new Compra(); // Criar uma instância de Compra
+                        compra.RealizarCompra(cliente, jogos);
                         break;
                     case "2":
-                        RemoverDoCarrinho(jogos);
+                        CarrinhoDeCompras carrinho = new CarrinhoDeCompras(cliente);
+                        carrinho.RemoverDoCarrinho(cliente, jogos);
                         break;
                     case "3":
                         Console.Clear();
@@ -284,82 +286,6 @@ namespace Models
             else
             {
                 Console.WriteLine("Carrinho vazio. Adicione jogos antes de finalizar a compra.");
-            }
-
-            Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
-            Console.ReadKey();
-            Console.Clear();
-        }
-
-        /// <summary>
-        /// Finaliza a compra, atualizando os estoques de jogos, registrando a compra no histórico do cliente
-        /// e salvando as alterações nos arquivos.
-        /// </summary>
-        /// <param name="cliente">O cliente que está realizando a compra.</param>
-        /// <param name="jogos">A lista de jogos disponíveis.</param>
-        public void RealizarCompra(Cliente cliente, List<Jogo> jogos)
-        {
-            // Adicionar jogos no carrinho aos jogos disponíveis
-            foreach (var jogoNoCarrinho in jogosNoCarrinho)
-            {
-                Jogo jogoOriginal = jogos.Find(j => j.Nome == jogoNoCarrinho.Nome);
-                if (jogoOriginal != null)
-                {
-                    jogoOriginal.Quantidade -= jogoNoCarrinho.Quantidade;
-                }
-            }
-
-            // Adicionar a compra ao histórico do cliente
-            Compra novaCompra = new Compra(new List<Jogo>(jogosNoCarrinho));
-            cliente.HistoricoCompras.Add(novaCompra);
-
-            Console.WriteLine("Compra bem-sucedida! Obrigado por comprar conosco.");
-
-            // Limpar carrinho
-            jogosNoCarrinho.Clear();
-
-            // Salvar os jogos atualizados no arquivo
-            //GerirFicheiros.SalvarJogos(jogos);
-
-            // Salvar o histórico de compras no arquivo associado ao cliente
-            cliente.SalvarHistoricoCompras();
-        }
-
-        /// <summary>
-        /// Remove um jogo específico do carrinho de compras do cliente.
-        /// </summary>
-        /// <param name="jogos">A lista de jogos disponíveis.</param>
-        public void RemoverDoCarrinho(List<Jogo> jogos)
-        {
-            Console.Clear();
-            Console.WriteLine("===== Remover do Carrinho =====");
-
-            if (jogosNoCarrinho.Count > 0)
-            {
-                Console.WriteLine("Jogos no Carrinho:");
-
-                for (int i = 0; i < jogosNoCarrinho.Count; i++)
-                {
-                    Console.WriteLine($"{i + 1}. {jogosNoCarrinho[i].Nome} - Quantidade: {jogosNoCarrinho[i].Quantidade}");
-                }
-
-                Console.Write("Escolha o número do jogo a ser removido: ");
-                if (int.TryParse(Console.ReadLine(), out int escolha) && escolha >= 1 && escolha <= jogosNoCarrinho.Count)
-                {
-                    // Remover o jogo escolhido do carrinho
-                    Jogo jogoRemovido = jogosNoCarrinho[escolha - 1];
-                    jogosNoCarrinho.Remove(jogoRemovido);
-
-                    Console.WriteLine($"{jogoRemovido.Nome} removido do carrinho com sucesso.\n");
-                }
-                else
-                {
-                    Console.WriteLine("Escolha inválida. Tente novamente.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Carrinho vazio. Não há jogos para remover.");
             }
 
             Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
