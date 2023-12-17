@@ -60,13 +60,13 @@ namespace Models
             
         }
 
-       
+
 
         /// <summary>
         /// Edita o perfil do cliente, permitindo a alteração de nome, e-mail ou senha.
         /// </summary>
         /// <param name="cliente">O cliente cujo perfil está sendo editado.</param>
-        public void EditarPerfil(Cliente cliente, List<Cliente>clientes)
+        public bool EditarPerfil(Cliente cliente, List<Cliente>clientes)
         {
             Console.Clear();
             while (true)
@@ -113,7 +113,7 @@ namespace Models
                     case "4":
                         Console.WriteLine("Retornando ao Menu Principal...");
                         Console.Clear();
-                        return;
+                        return true;
                     default:
                         Console.WriteLine("Opção inválida. Tente novamente.");
                         break;
@@ -121,7 +121,7 @@ namespace Models
             }
         }
 
-        public void ApagarConta(Cliente cliente, List<Cliente> clientes)
+        public bool ApagarConta(Cliente cliente, List<Cliente> clientes)
         {
             Console.Clear();
             Console.WriteLine($"Tem mesmo a certeza que pretende apagar a sua conta? Ao fazer isso todos os seus dados irão ser removidos.");
@@ -141,6 +141,7 @@ namespace Models
                     Console.WriteLine("Conta removida com sucesso. Pressione qualquer tecla para encerrar o programa...");
                     Console.ReadKey();
                     Environment.Exit(0); // Encerra o programa
+                    return true;
                 }
                 else
                 {
@@ -149,11 +150,15 @@ namespace Models
             }
             else
             {
-                Console.WriteLine("Operação cancelada. Pressione qualquer tecla para voltar ao menu...");
-                Console.ReadKey();
-                Console.Clear();
+                Console.WriteLine("Operação cancelada.");
             }
+
+            Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
+            Console.ReadKey();
+            Console.Clear();
+            return false;
         }
+        
 
 
         /// <summary>
@@ -219,7 +224,7 @@ namespace Models
         /// </summary>
         /// <param name="jogo">O jogo a ser adicionado ao carrinho.</param>
         /// <param name="quantidade">A quantidade desejada do jogo.</param>
-        public void AdicionarQuantidadeAoCarrinho(Jogo jogo, int quantidade)
+        public bool AdicionarQuantidadeAoCarrinho(Jogo jogo, int quantidade)
         {
             if (quantidade > 0 && quantidade <= jogo.Quantidade)
             {
@@ -234,10 +239,12 @@ namespace Models
 
                 jogosNoCarrinho.Add(jogoNoCarrinho);
                 Console.WriteLine($"{quantidade} cópias de {jogo.Nome} adicionadas ao carrinho.");
+                return true;
             }
             else
             {
                 Console.WriteLine("Quantidade inválida ou insuficiente para adição ao carrinho. Tente novamente.");
+                return false;
             }
         }
 
@@ -294,13 +301,13 @@ namespace Models
         }
 
         /// <summary>
-        /// Salva o histórico de compras do cliente em um arquivo JSON.
+        /// Salva o histórico de compras do cliente num ficheiro JSON.
         /// </summary>
         public void SalvarHistoricoCompras()
         {
             string json = JsonSerializer.Serialize(HistoricoCompras, new JsonSerializerOptions { WriteIndented = true });
 
-            // Certifique-se de criar a pasta para armazenar os arquivos de histórico de compras
+            // Certifique-se de criar a pasta para armazenar os ficheiros de histórico de compras
             if (!Directory.Exists(ComprasFolder))
             {
                 Directory.CreateDirectory(ComprasFolder);
@@ -310,7 +317,7 @@ namespace Models
         }
 
         /// <summary>
-        /// Carrega o histórico de compras do cliente a partir de um arquivo JSON.
+        /// Carrega o histórico de compras do cliente a partir de um ficheiro JSON.
         /// </summary>
         public void CarregarHistoricoCompras()
         {

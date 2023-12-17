@@ -41,8 +41,8 @@ namespace Models
         }
 
         /// <summary>
-        /// Finaliza a compra, atualizando os estoques de jogos, registrando a compra no histórico do cliente
-        /// e salvando as alterações nos arquivos.
+        /// Finaliza a compra, atualizando a quantidade de jogos, registando a compra no histórico do cliente
+        /// e guarda as alterações nos ficheiros.
         /// </summary>
         /// <param name="cliente">O cliente que está realizando a compra.</param>
         /// <param name="jogos">A lista de jogos disponíveis.</param>
@@ -67,10 +67,10 @@ namespace Models
             // Limpar carrinho
             cliente.jogosNoCarrinho.Clear();
 
-            // Salvar os jogos atualizados no arquivo
+            // Guarda os jogos atualizados no ficheiro
             GerirFicheiros.SalvarJogos(jogos);
 
-            // Salvar o histórico de compras no arquivo associado ao cliente
+            // Guarda o histórico de compras no ficheiro associado ao cliente
             cliente.SalvarHistoricoCompras();
         }
     }

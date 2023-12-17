@@ -230,7 +230,8 @@ static void RegistarCliente(List<Cliente> clientes)
         clientes.Add(novoCliente);
 
         Console.WriteLine("Cliente registado com sucesso!");
-    }
+        Console.Clear();
+        }
 }
 
         /// <summary>
