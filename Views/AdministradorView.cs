@@ -1,4 +1,16 @@
-﻿using System;
+﻿/*
+ 
+*
+@file AdministradorView.cs
+@author Nelson (a20743@alunos.ipca.pt)
+@author Rafael (a16452@alunos.ipca.pt)
+@brief
+@date Dezembro
+*
+@copyright Copyright (c) 2023
+*
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +19,13 @@ using Models;
 
 namespace Views
 {
+
+    /// <summary>
+    /// Classe responsável por exibir a interface do utilizador para as operações do Administrador na loja.
+    /// </summary>
     public class AdministradorView
     {
+        #region Métodos Públicos
         /// <summary>
         /// Exibe o menu principal do administrador, permitindo a execução de várias operações na loja.
         /// </summary>
@@ -54,6 +71,6 @@ namespace Views
                 }
             }
         }
-
+        #endregion
     }
 }

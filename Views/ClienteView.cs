@@ -1,4 +1,16 @@
-﻿using System;
+﻿/*
+ 
+*
+@file ClienteView.cs
+@author Nelson (a20743@alunos.ipca.pt)
+@author Rafael (a16452@alunos.ipca.pt)
+@brief
+@date Dezembro
+*
+@copyright Copyright (c) 2023
+*
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +19,12 @@ using Models;
 
 namespace Views
 {
+    /// <summary>
+    /// Classe responsável por exibir a interface do utilizador para as operações do Cliente na loja de jogos.
+    /// </summary>
     public class ClienteView
     {
+        #region Métodos Públicos
         /// <summary>
         /// Exibe o menu principal para o cliente interagir com a loja de jogos.
         /// </summary>
@@ -131,6 +147,6 @@ namespace Views
             Console.ReadKey();
             Console.Clear();
         }
-
+        #endregion
     }
 }

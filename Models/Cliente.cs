@@ -1,4 +1,16 @@
-﻿using System;
+﻿/*
+ 
+*
+@file Cliente.cs
+@author Nelson (a20743@alunos.ipca.pt)
+@author Rafael (a16452@alunos.ipca.pt)
+@brief
+@date Dezembro
+*
+@copyright Copyright (c) 2023
+*
+*/
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -11,6 +23,8 @@ namespace Models
     /// </summary>
     public class Cliente
     {
+        #region Propriedades
+
         /// <summary>
         /// Obtém ou define o nome do cliente.
         /// </summary>
@@ -36,13 +50,27 @@ namespace Models
         /// </summary>
         public List<Compra> HistoricoCompras { get; set; }
 
+        #endregion
+
+        #region Campos Públicos
+
         public List<Jogo> jogosNoCarrinho = new List<Jogo>();
+        #endregion
+
+        #region Campos Privados
+
         private const string ComprasFolder = "HistoricoCompras";
+        #endregion
+
+        #region Propriedades Privadas
 
         /// <summary>
         /// Obtém o caminho do ficheiro para armazenar o histórico de compras do cliente.
         /// </summary>
         private string ComprasFilePath => Path.Combine(ComprasFolder, $"{Nome}_historico_compras.json");
+        #endregion
+
+        #region Construtor
 
         /// <summary>
         /// Inicializa uma nova instância da classe Cliente.
@@ -59,8 +87,9 @@ namespace Models
             HistoricoCompras = new List<Compra>();
             
         }
+        #endregion
 
-
+        #region Métodos Públicos
 
         /// <summary>
         /// Edita o perfil do cliente, permitindo a alteração de nome, e-mail ou senha.
@@ -121,6 +150,12 @@ namespace Models
             }
         }
 
+        /// <summary>
+        /// Remove a conta do cliente, exigindo autenticação prévia.
+        /// </summary>
+        /// <param name="cliente">O cliente que deseja remover a conta.</param>
+        /// <param name="clientes">A lista de clientes.</param>
+        /// <returns>True se a conta foi removida com sucesso; False, caso contrário.</returns>
         public bool ApagarConta(Cliente cliente, List<Cliente> clientes)
         {
             Console.Clear();
@@ -334,6 +369,7 @@ namespace Models
                 Console.WriteLine($"Ocorreu um erro ao carregar o histórico de compras: {ex.Message}");
             }
         }
+        #endregion
 
     }
 }

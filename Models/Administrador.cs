@@ -1,9 +1,25 @@
-﻿using System;
+﻿/*
+ 
+*
+@file Administrador.cs
+@author Nelson (a20743@alunos.ipca.pt)
+@author Rafael (a16452@alunos.ipca.pt)
+@brief
+@date Dezembro
+*
+@copyright Copyright (c) 2023
+*
+*/
+using System;
 
 namespace Models
 {
+    /// <summary>
+    /// Representa um administrador da loja de jogos, incluindo informações do perfil.
+    /// </summary>
     public class Administrador
     {
+        #region Propriedades
         /// <summary>
         /// Obtém ou define o nome do administrador.
         /// </summary>
@@ -18,6 +34,9 @@ namespace Models
         /// Obtém ou define a senha do administrador.
         /// </summary>
         public string Senha { get; set; }
+        #endregion
+
+        #region Construtor
 
         /// <summary>
         /// Inicializa uma nova instância da classe Administrador.
@@ -31,7 +50,9 @@ namespace Models
             Email = email ?? throw new ArgumentNullException(nameof(email));
             Senha = senha ?? throw new ArgumentNullException(nameof(senha));
         }
+        #endregion
 
+        #region Métodos Públicos
 
         /// <summary>
         /// Regista um novo administrador e adiciona-o à lista de administradores.
@@ -218,7 +239,7 @@ namespace Models
             Console.Clear();
         }
 
-
+        #endregion
 
     }
 }

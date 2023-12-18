@@ -1,9 +1,25 @@
-﻿using System;
+﻿/*
+ 
+*
+@file Compra.cs
+@author Nelson (a20743@alunos.ipca.pt)
+@author Rafael (a16452@alunos.ipca.pt)
+@brief
+@date Dezembro
+*
+@copyright Copyright (c) 2023
+*
+*/
+using System;
 
 namespace Models
 {
+    /// <summary>
+    /// Representa uma compra realizada por um cliente na loja de jogos.
+    /// </summary>
     public class Compra
     {
+        #region Propriedades
         /// <summary>
         /// Obtém ou define a lista de jogos comprados nesta compra.
         /// </summary>
@@ -13,6 +29,10 @@ namespace Models
         /// Obtém ou define a data e hora da compra.
         /// </summary>
         public DateTime DataCompra { get; set; }
+
+        #endregion
+
+        #region Construtores
 
         /// <summary>
         /// Construtor que aceita a lista de jogos comprados, inicializando a data da compra para o momento atual.
@@ -39,6 +59,10 @@ namespace Models
             JogosComprados = new List<Jogo>(); // Inicializa a lista para evitar null reference
             DataCompra = DateTime.Now;
         }
+
+        #endregion
+
+        #region Métodos Públicos
 
         /// <summary>
         /// Finaliza a compra, atualizando a quantidade de jogos, registando a compra no histórico do cliente
@@ -73,5 +97,6 @@ namespace Models
             // Guarda o histórico de compras no ficheiro associado ao cliente
             cliente.GuardarHistoricoCompras();
         }
+        #endregion
     }
 }

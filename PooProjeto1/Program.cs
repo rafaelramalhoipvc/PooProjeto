@@ -1,4 +1,17 @@
-﻿using System;
+﻿/*
+ 
+*
+@file Program.cs
+@author Nelson (a20743@alunos.ipca.pt)
+@author Rafael (a16452@alunos.ipca.pt)
+@brief
+@date Dezembro
+*
+@copyright Copyright (c) 2023
+*
+*/
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -24,6 +37,8 @@ namespace LojaDeJogos
 
             Console.WriteLine("Operações concluídas com sucesso!");
         }
+
+        #region Métodos Principais
 
         /// <summary>
         /// Exibe o menu principal da aplicação.
@@ -106,44 +121,40 @@ namespace LojaDeJogos
             }
         }
 
+        #endregion
 
+        #region Métodos do Cliente
 
-//-----------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Registra um novo cliente.
+        /// </summary>
+        /// <param name="clientes">Lista de clientes.</param>
+        static void RegistarCliente(List<Cliente> clientes)
+            {
+                Console.Clear();
+                Console.Write("Digite seu nome: ");
+                string nome = Console.ReadLine();
 
-//-----------------------------------------------------------------------------------------------------------
+                Console.Write("Digite seu email: ");
+                string email = Console.ReadLine();
 
-//--------------------------------------------------------------------------------------------------------
-//PARTE DO CLIENTE
+                // REGRA DE NEGÓCIO - Verifica se já existe um cliente com o mesmo email
+                if (clientes.Any(c => c.Email == email))
+                {
+                    Console.WriteLine("Já existe um cliente registado com este email. Tente novamente com um email diferente.");
+                }
+                else
+                {
+                    Console.Write("Digite sua senha: ");
+                    string senha = Console.ReadLine();
 
-/// <summary>
-/// Registra um novo cliente.
-/// </summary>
-/// <param name="clientes">Lista de clientes.</param>
-static void RegistarCliente(List<Cliente> clientes)
-{
-    Console.Clear();
-    Console.Write("Digite seu nome: ");
-    string nome = Console.ReadLine();
+                    Cliente novoCliente = new Cliente(nome, email, senha);
+                    clientes.Add(novoCliente);
 
-    Console.Write("Digite seu email: ");
-    string email = Console.ReadLine();
-
-    // REGRA DE NEGÓCIO - Verifica se já existe um cliente com o mesmo email
-    if (clientes.Any(c => c.Email == email))
-    {
-        Console.WriteLine("Já existe um cliente registado com este email. Tente novamente com um email diferente.");
-    }
-    else
-    {
-        Console.Write("Digite sua senha: ");
-        string senha = Console.ReadLine();
-
-        Cliente novoCliente = new Cliente(nome, email, senha);
-        clientes.Add(novoCliente);
-
-        Console.WriteLine("Cliente registado com sucesso!");
-        Console.Clear();
-        }
-}
+                    Console.WriteLine("Cliente registado com sucesso!");
+                    Console.Clear();
+                    }
+            }
+        #endregion
     }
 }
