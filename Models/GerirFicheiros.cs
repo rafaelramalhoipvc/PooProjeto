@@ -21,7 +21,7 @@ namespace Models  // Corrigi o nome do namespace
             return clientes;
         }
 
-        public static void SalvarClientes(List<Cliente> clientes)
+        public static void GuardarClientes(List<Cliente> clientes)
         {
             string fileName = "clientes.json";
 
@@ -50,7 +50,7 @@ namespace Models  // Corrigi o nome do namespace
             return administradores;
         }
 
-        public static void SalvarAdministradores(List<Administrador> administradores)
+        public static void GuardarAdministradores(List<Administrador> administradores)
         {
             string fileName = "administradores.json";
             string json = JsonSerializer.Serialize(administradores, new JsonSerializerOptions { WriteIndented = true });
@@ -71,7 +71,7 @@ namespace Models  // Corrigi o nome do namespace
             return jogos;
         }
 
-        public static void SalvarJogos(List<Jogo> jogos)
+        public static void GuardarJogos(List<Jogo> jogos)
         {
             string fileName = "jogos.json";
             string json = JsonSerializer.Serialize(jogos, new JsonSerializerOptions { WriteIndented = true });

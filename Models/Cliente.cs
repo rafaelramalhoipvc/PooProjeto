@@ -111,7 +111,7 @@ namespace Models
                         Console.WriteLine("Senha atualizada com sucesso!");
                         break;
                     case "4":
-                        Console.WriteLine("Retornando ao Menu Principal...");
+                        Console.WriteLine("Voltando ao Menu Principal...");
                         Console.Clear();
                         return true;
                     default:
@@ -131,14 +131,14 @@ namespace Models
             if (confirmacao == "S")
             {
                 // REGRA DE NEGÓCIO - Autentica o cliente antes de permitir a exclusão
-                Console.Write("Digite sua senha para confirmar a exclusão da conta: ");
+                Console.Write("Insira sua senha para confirmar a exclusão da conta: ");
                 string senhaConfirmacao = Console.ReadLine();
 
                 if (senhaConfirmacao == cliente.Senha)
                 {
                     clientes.Remove(cliente);
-                    GerirFicheiros.SalvarClientes(clientes); // Guarda a lista atualizada no ficheiro
-                    Console.WriteLine("Conta removida com sucesso. Pressione qualquer tecla para encerrar o programa...");
+                    GerirFicheiros.GuardarClientes(clientes); // Guarda a lista atualizada no ficheiro
+                    Console.WriteLine("Conta removida com sucesso. Prima qualquer tecla para encerrar o programa...");
                     Console.ReadKey();
                     Environment.Exit(0); // Encerra o programa
                     return true;
@@ -153,7 +153,7 @@ namespace Models
                 Console.WriteLine("Operação cancelada.");
             }
 
-            Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
+            Console.WriteLine("Prima qualquer tecla para voltar ao menu...");
             Console.ReadKey();
             Console.Clear();
             return false;
@@ -192,19 +192,19 @@ namespace Models
                 Console.WriteLine("Não há jogos disponíveis no momento.");
             }
 
-            Console.Write("Digite o nome do jogo que deseja adicionar ao carrinho: ");
+            Console.Write("Insira o nome do jogo que deseja adicionar ao carrinho: ");
             string nomeJogo = Console.ReadLine();
 
             Jogo jogoSelecionado = jogos.Find(j => j.Nome == nomeJogo);
 
             if (jogoSelecionado != null)
             {
-                Console.Write($"Digite a quantidade desejada para {jogoSelecionado.Nome}: ");
+                Console.Write($"Insira a quantidade desejada para {jogoSelecionado.Nome}: ");
                 int quantidadeDesejada;
                 while (!int.TryParse(Console.ReadLine(), out quantidadeDesejada) || quantidadeDesejada < 1)
                 {
                     Console.WriteLine("Quantidade inválida. Digite novamente.");
-                    Console.Write($"Digite a quantidade desejada para {jogoSelecionado.Nome}: ");
+                    Console.Write($"Insira a quantidade desejada para {jogoSelecionado.Nome}: ");
                 }
 
                 AdicionarQuantidadeAoCarrinho(jogoSelecionado, quantidadeDesejada);
@@ -303,7 +303,7 @@ namespace Models
         /// <summary>
         /// Salva o histórico de compras do cliente num ficheiro JSON.
         /// </summary>
-        public void SalvarHistoricoCompras()
+        public void GuardarHistoricoCompras()
         {
             string json = JsonSerializer.Serialize(HistoricoCompras, new JsonSerializerOptions { WriteIndented = true });
 

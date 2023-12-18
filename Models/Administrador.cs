@@ -40,10 +40,10 @@ namespace Models
         public void RegistarAdministrador(List<Administrador> administradores)
         {
             Console.Clear();
-            Console.Write("Digite o nome do administrador: ");
+            Console.Write("Insere o nome do administrador: ");
             string nome = Console.ReadLine();
 
-            Console.Write("Digite o email do administrador: ");
+            Console.Write("Insere o email do administrador: ");
             string email = Console.ReadLine();
 
             // REGRA DE NEGÓCIO - Verifica se já existe um administrador com o mesmo email
@@ -53,7 +53,7 @@ namespace Models
             }
             else
             {
-                Console.Write("Digite a senha do administrador: ");
+                Console.Write("Insira a senha do administrador: ");
                 string senha = Console.ReadLine();
 
                 Administrador novoAdministrador = new Administrador(nome, email, senha);
@@ -138,7 +138,7 @@ namespace Models
                 Console.WriteLine($"Jogo com o nome '{nomeJogo}' não encontrado.");
             }
 
-            Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
+            Console.WriteLine("Prima qualquer tecla para voltar ao menu...");
             Console.ReadKey();
             Console.Clear();
         }

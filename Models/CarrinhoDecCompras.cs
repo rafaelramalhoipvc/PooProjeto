@@ -87,7 +87,7 @@ namespace Models
                 Console.WriteLine("Carrinho vazio. Não há jogos para remover.");
             }
 
-            Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
+            Console.WriteLine("Prima qualquer tecla para voltar ao menu...");
             Console.ReadKey();
             Console.Clear();
         }

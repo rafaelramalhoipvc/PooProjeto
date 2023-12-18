@@ -68,10 +68,10 @@ namespace Models
             cliente.jogosNoCarrinho.Clear();
 
             // Guarda os jogos atualizados no ficheiro
-            GerirFicheiros.SalvarJogos(jogos);
+            GerirFicheiros.GuardarJogos(jogos);
 
             // Guarda o histórico de compras no ficheiro associado ao cliente
-            cliente.SalvarHistoricoCompras();
+            cliente.GuardarHistoricoCompras();
         }
     }
 }

@@ -45,7 +45,7 @@ namespace Views
                         admin.EditarJogo(jogos);
                         break;
                     case "5":
-                        Console.WriteLine($"Logout bem-sucedido. Até logo, {admin.Nome}!");
+                        Console.WriteLine($"Logout bem-sucedido. Até breve, {admin.Nome}!");
                         Console.Clear();
                         return;
                     default:

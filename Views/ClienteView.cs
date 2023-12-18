@@ -93,7 +93,7 @@ namespace Views
                 Console.WriteLine("Não há jogos disponíveis no momento.");
             }
 
-            Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
+            Console.WriteLine("Prima qualquer tecla para regressar ao menu...");
             Console.ReadKey();
             Console.Clear();
         }
@@ -127,7 +127,7 @@ namespace Views
                 Console.WriteLine("Nenhum histórico de compras disponível.");
             }
 
-            Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
+            Console.WriteLine("Prima qualquer tecla para regressar ao menu....");
             Console.ReadKey();
             Console.Clear();
         }
