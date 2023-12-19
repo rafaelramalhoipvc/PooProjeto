@@ -193,14 +193,14 @@ namespace Models
             Console.Clear();
             return false;
         }
-        
+
 
 
         /// <summary>
         /// Adiciona um jogo ao carrinho de compras do cliente.
         /// </summary>
         /// <param name="jogos">A lista de jogos disponíveis.</param>
-        public void AdicionarAoCarrinho(List<Jogo> jogos)
+        public bool AdicionarAoCarrinho(List<Jogo> jogos)
         {
             Console.Clear();
             Console.WriteLine("===== Jogos Disponíveis =====");
@@ -242,16 +242,22 @@ namespace Models
                     Console.Write($"Insira a quantidade desejada para {jogoSelecionado.Nome}: ");
                 }
 
-                AdicionarQuantidadeAoCarrinho(jogoSelecionado, quantidadeDesejada);
+                bool adicaoBemSucedida = AdicionarQuantidadeAoCarrinho(jogoSelecionado, quantidadeDesejada);
+
+                Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
+                Console.ReadKey();
+                Console.Clear();
+
+                return adicaoBemSucedida;
             }
             else
             {
                 Console.WriteLine($"Jogo com o nome '{nomeJogo}' não encontrado.");
+                Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
+                Console.ReadKey();
+                Console.Clear();
+                return false;
             }
-
-            Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
-            Console.ReadKey();
-            Console.Clear();
         }
 
         /// <summary>
