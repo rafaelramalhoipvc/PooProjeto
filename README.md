@@ -53,5 +53,3 @@ Contributions are welcome! If you'd like to contribute to the project, please fo
 4. Push to the branch: `git push origin feature-name`.
 5. Open a pull request.
 
-## License
-This project is licensed under the [MIT License](LICENSE).
