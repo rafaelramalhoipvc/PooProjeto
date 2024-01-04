@@ -64,7 +64,7 @@ namespace LojaDeJogos
                 switch (opcao)
                 {
                     case "1":
-                        RegistarCliente(clientes);
+                        Cliente.RegistarCliente(clientes);
                         break;
                     case "2":
                         Login(clientes, administradores, jogos);
@@ -125,36 +125,6 @@ namespace LojaDeJogos
 
         #region Métodos do Cliente
 
-        /// <summary>
-        /// Registra um novo cliente.
-        /// </summary>
-        /// <param name="clientes">Lista de clientes.</param>
-        static void RegistarCliente(List<Cliente> clientes)
-            {
-                Console.Clear();
-                Console.Write("Digite seu nome: ");
-                string nome = Console.ReadLine();
-
-                Console.Write("Digite seu email: ");
-                string email = Console.ReadLine();
-
-                // REGRA DE NEGÓCIO - Verifica se já existe um cliente com o mesmo email
-                if (clientes.Any(c => c.Email == email))
-                {
-                    Console.WriteLine("Já existe um cliente registado com este email. Tente novamente com um email diferente.");
-                }
-                else
-                {
-                    Console.Write("Digite sua senha: ");
-                    string senha = Console.ReadLine();
-
-                    Cliente novoCliente = new Cliente(nome, email, senha);
-                    clientes.Add(novoCliente);
-
-                    Console.WriteLine("Cliente registado com sucesso!");
-                    Console.Clear();
-                    }
-            }
         #endregion
     }
 }

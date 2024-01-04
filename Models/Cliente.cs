@@ -92,6 +92,38 @@ namespace Models
         #region Métodos Públicos
 
         /// <summary>
+        /// Registra um novo cliente.
+        /// </summary>
+        /// <param name="clientes">Lista de clientes.</param>
+        public static void RegistarCliente(List<Cliente> clientes)
+        {
+            Console.Clear();
+            Console.Write("Digite seu nome: ");
+            string nome = Console.ReadLine();
+
+            Console.Write("Digite seu email: ");
+            string email = Console.ReadLine();
+
+            // REGRA DE NEGÓCIO - Verifica se já existe um cliente com o mesmo email
+            if (clientes.Any(c => c.Email == email))
+            {
+                Console.WriteLine("Já existe um cliente registado com este email. Tente novamente com um email diferente.");
+            }
+            else
+            {
+                Console.Write("Digite sua senha: ");
+                string senha = Console.ReadLine();
+
+                Cliente novoCliente = new Cliente(nome, email, senha);
+                clientes.Add(novoCliente);
+
+                Console.WriteLine("Cliente registado com sucesso!");
+                Console.Clear();
+            }
+        }
+
+
+        /// <summary>
         /// Edita o perfil do cliente, permitindo a alteração de nome, e-mail ou senha.
         /// </summary>
         /// <param name="cliente">O cliente cujo perfil está sendo editado.</param>
